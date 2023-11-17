@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 
 public class Funciones {
     
-    public static void pedir_numeros(int cant_numero_pedir) {
+    public static void pedir_numeros(int cant_numero_pedir, boolean[] jugada, int[] numeros_jugados) {
         for (int i = 0; i < cant_numero_pedir; i++) {
             try {
                 System.out.print("Ingrese el numero " + (i + 1) + ": ");
@@ -26,16 +26,16 @@ public class Funciones {
         }
     }
     
-    public static void ingresar_dinero(){
+    public static int ingresar_dinero(){
         while (true){
             try {
                 System.out.print("\nIngrese cantidad de dinero a apostar: ");
                 int dinero_ingresado = input.nextInt();
                 if (dinero_ingresado >= 40  && dinero_ingresado <= 400){
-                    cant_dinero = dinero_ingresado;
+                    int dinero_apostado = dinero_ingresado;
                     se_realizo_apuesta = true;
-                    System.out.println("\nApuesta realizada exitosamente.");
-                    break;
+                    System.out.println("\nApuesta realizada exitosamente.\n");
+                    return dinero_apostado;
                 } else {
                     System.out.println("El monto a apostar debe ser entre 40$ y 400$.\n");
                 }
@@ -47,11 +47,17 @@ public class Funciones {
         }
     }
     
-    public static void borrar_contenido_arreglos(){
+    public static void reiniciar_tombola(boolean[] jugada, boolean[] sorteo, int[] numeros_sorteados, int[] numeros_jugados){
         for (int i = 0; i < jugada.length; i++){
             jugada[i] = false;
             sorteo[i] = false;   
         }
+        boolean se_realizo_sorte = false;
+        se_realizo_apuesta = false;
+        tipo_sorteo = "null";
+        modalidad = 0;
+        dinero_apostado_vespertino = 0;
+        dinero_apostado_nocturno = 0;
         
         for (int i = 0; i < numeros_sorteados.length; i++){
             numeros_sorteados[i] = 0;

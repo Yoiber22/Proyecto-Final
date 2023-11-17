@@ -11,19 +11,24 @@ public class Config {
     //Random
     public static Random random = new Random();
     
-    //Arreglos
-    public static boolean[] jugada = new boolean[100];
-    public static boolean[] sorteo = new boolean[100];
-    public static int[] numeros_sorteados = new int[20];
-    public static int[] numeros_jugados = new int[7];
+    //Arreglos Vespertino
+    public static boolean[] jugada_vespertino = new boolean[100];
+    public static boolean[] sorteo_vespertino = new boolean[100];
+    public static int[] numeros_sorteados_vespertino = new int[20];
+    public static int[] numeros_jugados_vespertino = new int[7];
     
-    //Variables Booleanas
+    // Arreglos Nocturno
+    public static boolean[] jugada_nocturno = new boolean[100];
+    public static boolean[] sorteo_nocturno = new boolean[100];
+    public static int[] numeros_sorteados_nocturno = new int[20];
+    public static int[] numeros_jugados_nocturno = new int[7];
+    
+    
+    //Variables 
     public static boolean se_realizo_sorteo = false;
     public static boolean se_realizo_apuesta = false;
-    
-    //Modalidad
+    public static String tipo_sorteo = "null";
     public static int modalidad = 0;
-    
-    //Dinero Ingresado
-    public static int cant_dinero = 0;
+    public static int dinero_apostado_vespertino = 0;
+    public static int dinero_apostado_nocturno = 0;
 }

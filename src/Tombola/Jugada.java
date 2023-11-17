@@ -9,89 +9,100 @@ public class Jugada {
         public static boolean salir_menu_jugada = false;
         
         public static void menu_jugada(){
-                  
-        do{    
-            try{
-             
-                System.out.println("\nModalidaes\n");
-                System.out.println("1. Modalidad 3");
-                System.out.println("2. Modalidad 4");
-                System.out.println("3. Modalidad 5");
-                System.out.println("4. Modalidad 6 ");
-                System.out.println("5. Modalidad 7");
-                System.out.println("0. Salir\n");
-                System.out.print("Ingrese Modalidad: "); 
-                int opcion = input.nextInt();
-                input.nextLine();
+            
+        if (!se_realizo_apuesta){
+            do{
+                try{
+                    System.out.println("\n\nHorarios Sorteo\n");
+                    System.out.println("1. Vespertino");
+                    System.out.println("2. Nocturno");
+                    System.out.println("3. Ambos");
+                    System.out.println("0. Salir\n");
+                    System.out.print("Ingrese opcion: "); 
+                    int opcion = input.nextInt();
+                    input.nextLine();
 
-                switch(opcion){
-                    case 0:
-                        salir_menu_jugada = true;
-                        break;
-                    case 1:
-                        modalidad_3();
-                        break;
-                    case 2:
-                        modalidad_4();
-                        break;
-                    case 3:
-                        modalidad_5();
-                        break;
-                    case 4:
-                        modalidad_6();
-                        break;
-                    case 5:
-                        modalidad_7();
-                        break;
-                    default:
-                        System.out.println("Opcion incorrecta.");
-
+                    switch(opcion){
+                        case 0:
+                            salir_menu_jugada = true;
+                            break;
+                        case 1:
+                            tipo_sorteo = "vespertino";
+                            break;
+                        case 2:
+                            tipo_sorteo = "nocturno";
+                            break;
+                        case 3:
+                            tipo_sorteo = "ambos";
+                            break;               
+                        default:
+                            System.out.println("Opcion incorrecta.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Solo se pueden ingresar numeros.");
+                    input.nextLine();
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Solo se pueden ingresar numeros.");
-                input.nextLine();
-            }                  
-        }while(!salir_menu_jugada);
-
+            
+                if (!salir_menu_jugada){
+                    menu_modalidades();
+                }
+                
+                      
+            }while(!salir_menu_jugada); 
+        } else {
+                System.out.println("Ya se realizo la apuesta.");
+            }
     }
     
-    public static void modalidad_3(){
-                System.out.println("\nModalidad 3\n");
-                modalidad = 3;
-                pedir_numeros(3);
-                ingresar_dinero();
+    public static void menu_modalidades(){
+        try{
+            System.out.println("\n\nModalidaes\n");
+
+            System.out.print("Ingrese Modalidad entre 3 y 7: "); 
+            int opcion = input.nextInt();
+            input.nextLine();
+
+            switch(opcion){
+                case 3:
+                    modalidades(3);
+                    break;
+                case 4:
+                    modalidades(4);
+                    break;
+                case 5:
+                    modalidades(5);
+                    break;
+                case 6:
+                    modalidades(6);
+                    break;
+                case 7:
+                    modalidades(7);
+                    break;
+                default:
+                    System.out.println("Opcion incorrecta.");
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("Solo se pueden ingresar numeros.");
+            input.nextLine();
+        }
+    }
+    
+    public static void modalidades(int num_modalidad){
+                System.out.println("\nModalidad "+num_modalidad+"\n");
+                modalidad = num_modalidad;
+                if (Config.tipo_sorteo.equals("vespertino")){
+                    pedir_numeros(num_modalidad, jugada_vespertino, numeros_jugados_vespertino);
+                    dinero_apostado_vespertino = ingresar_dinero();
+                } else if (Config.tipo_sorteo.equals("nocturno")){
+                    pedir_numeros(num_modalidad, jugada_nocturno, numeros_jugados_nocturno);
+                    dinero_apostado_nocturno = ingresar_dinero();
+                } else {
+                    pedir_numeros(num_modalidad, jugada_vespertino, numeros_jugados_vespertino);
+                    dinero_apostado_vespertino = ingresar_dinero();
+                    System.out.println("");
+                    pedir_numeros(num_modalidad, jugada_nocturno, numeros_jugados_nocturno);
+                    dinero_apostado_nocturno = ingresar_dinero();
+                }
                 salir_menu_jugada = true;
-            }
-    
-    public static void modalidad_4(){
-                System.out.println("\nModalidad 4\n");
-                modalidad = 4;
-                pedir_numeros(4);
-                ingresar_dinero();
-                salir_menu_jugada =  true;
-            }
-    
-    public static void modalidad_5(){
-                System.out.println("\nModalidad 5\n");
-                modalidad = 5;
-                pedir_numeros(5);
-                ingresar_dinero();
-                salir_menu_jugada =  true;
-            }
-    
-    public static void modalidad_6(){
-                System.out.println("\nModalidad 6\n");
-                modalidad = 6;
-                pedir_numeros(6);
-                ingresar_dinero();
-                salir_menu_jugada =  true;
-            }
-    
-    public static void modalidad_7(){
-                System.out.println("\nModalidad 7\n");
-                modalidad = 7;
-                pedir_numeros(7);
-                ingresar_dinero();
-                salir_menu_jugada =  true;
             }
 }

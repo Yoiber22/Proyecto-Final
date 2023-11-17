@@ -32,16 +32,36 @@ public class Main {
                         Jugada.menu_jugada();
                         break;
                     case 2:
-                        Sorteo.hacer_sorteo();
+                        if (Config.tipo_sorteo.equals("vespertino")){
+                            Sorteo.hacer_sorteo(Config.numeros_sorteados_vespertino ,Config.sorteo_vespertino, "Vespertino");         
+                        } else if (Config.tipo_sorteo.equals("nocturno")){
+                            Sorteo.hacer_sorteo(Config.numeros_sorteados_nocturno ,Config.sorteo_vespertino, "Nocturno");
+                        } else {
+                            Sorteo.realizar_ambos_sorteos();
+                        }
                         break;
                     case 3:
-                        Resultado.mostar_resultado();
+                        if (Config.tipo_sorteo.equals("vespertino")){
+                            Resultado.mostar_resultado(Config.numeros_jugados_vespertino, Config.sorteo_vespertino, Config.jugada_vespertino, Config.numeros_sorteados_vespertino, Config.dinero_apostado_vespertino);  
+                            Funciones.reiniciar_tombola(Config.jugada_vespertino, Config.sorteo_vespertino, Config.numeros_jugados_vespertino, Config.numeros_jugados_vespertino);
+                        } else if (Config.tipo_sorteo.equals("nocturno")){
+                            Resultado.mostar_resultado(Config.numeros_jugados_nocturno, Config.sorteo_nocturno, Config.jugada_nocturno, Config.numeros_sorteados_nocturno, Config.dinero_apostado_nocturno);
+                            Funciones.reiniciar_tombola(Config.jugada_nocturno, Config.sorteo_nocturno, Config.numeros_jugados_nocturno, Config.numeros_jugados_nocturno);
+                        } else {
+                            Resultado.mostar_resultado(Config.numeros_jugados_vespertino, Config.sorteo_vespertino, Config.jugada_vespertino, Config.numeros_sorteados_vespertino, Config.dinero_apostado_vespertino);
+                            System.out.println("");
+                            Resultado.mostar_resultado(Config.numeros_sorteados_nocturno, Config.sorteo_nocturno, Config.jugada_nocturno, Config.numeros_sorteados_nocturno, Config.dinero_apostado_nocturno);
+                            Funciones.reiniciar_tombola(Config.jugada_vespertino, Config.sorteo_vespertino, Config.numeros_jugados_vespertino, Config.numeros_jugados_vespertino);
+                            Funciones.reiniciar_tombola(Config.jugada_nocturno, Config.sorteo_nocturno, Config.numeros_jugados_nocturno, Config.numeros_jugados_nocturno);
+                        }
                         break;
                     default:
                         System.out.println("Opcion incorrecta.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Solo se pueden ingresar numeros.");
+                Config.input.next();
+                Main.menu_pricipal();
             }
        }while(!salir);   
         
